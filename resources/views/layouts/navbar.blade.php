@@ -33,20 +33,11 @@
                         </li>
                     @endif
 
-
-                    <li class='nav-item dropdown'>
-                        <a class='nav-link dropdown-toggle' href='' role='button' data-bs-toggle='dropdown'
-                            aria-expanded='false'>
-                            Dropdown
-                        </a>
-                        <ul class='dropdown-menu'>
-                            <li><a class='dropdown-item' href=''>Action</a></li>
-                            <li>
-                                <hr class='dropdown-divider'>
-                            </li>
-                            <li><a class='dropdown-item' href=''>Something else here</a></li>
-                        </ul>
+                    <li class='nav-item'>
+                        <a class='nav-link @if (Route::currentRouteName() === 'transaction.index') active @endif' aria-current='page'
+                            href='{{ route('transaction.index') }}'>Transactions</a>
                     </li>
+
                 </ul>
                 <div class='dropdown'>
                     <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown'
@@ -75,6 +66,8 @@
         integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'>
     </script>
     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+    @yield('script')
 
     @if (session('success'))
         <script>

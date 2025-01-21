@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,8 +22,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profile', [AuthController::class, 'editProfile'])->name('profile.edit');
     Route::put('profile', [AuthController::class, 'updateProfile'])->name('profile.update');
-
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('transactions', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('transaction/create', [TransactionController::class, 'create'])->name('transaction.create');
+    Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
+    Route::get('transaction/{transaction}', [TransactionController::class, 'show'])->name('transaction.show');
 
     Route::middleware('role:admin')->group(function () {
         Route::get('product', [ProductController::class, 'index'])->name('product.index');
